@@ -49,13 +49,11 @@ void quick_sort_help(int *array, int low, int high, size_t size)
  */
 int part_array(int *array, int low, int high, size_t size)
 {
-	int i = low - 1;
-	int j = low;
-	int temp;
+	int i = low - 1, j, temp, piv = array[high];
 
-	while (j <= high)
+	for (j = low ; j < high ; j++)
 	{
-		if (array[j] < array[high])
+		if (array[j] < piv)
 		{
 			i++;
 
@@ -63,7 +61,6 @@ int part_array(int *array, int low, int high, size_t size)
 			array[i] = array[j];
 			array[j] = temp;
 		}
-		j++;
 	}
 	temp = array[i + 1];
 	array[i + 1] = array[high];
