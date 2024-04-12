@@ -9,24 +9,11 @@
 void quick_sort(int *array, size_t size)
 {
 	int i = 0;
-	size_t j;
 	int p = size - 1;
 
 	if(array == NULL || size < 2)
 		return;
 
-	for (j = 0 ; j < size - 1 ; j++ )
-		{
-			if (array[j] < array[j + 1])
-				j++;
-			else
-			{
-				if (j == size - 1)
-					return;
-				else
-					break;
-			}
-		}
 	quick_sort_help(array, i, p, size);
 }
 
