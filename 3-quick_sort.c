@@ -28,12 +28,11 @@ void quick_sort(int *array, size_t size)
  */
 void quick_sort_help(int *array, int low, int high, size_t size)
 {
-	int pi;
+	int pi = 0;
 
 	if (low < high)
 	{
-		pi = part_array(array, low, high);
-		print_array(array, size);
+		pi = part_array(array, low, high, size);
 
 		quick_sort_help(array, low, pi - 1, size);
 		quick_sort_help(array, pi + 1, high, size);
@@ -45,37 +44,32 @@ void quick_sort_help(int *array, int low, int high, size_t size)
  * @array: array to sort
  * @low: low index value
  * @high: high index value
+ * @size: size of the array
  * Return: pivot index to quick_sort_help
  */
-int part_array(int *array, int low, int high)
+int part_array(int *array, int low, int high, size_t size)
 {
 	int i = low - 1;
 	int j = low;
+	int temp;
 
 	while (j <= high)
 	{
 		if (array[j] < array[high])
 		{
 			i++;
-			swap_val(&array[i], &array[j]);
+
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
 		}
 		j++;
 	}
-	swap_val(&array[i + 1], &array[high]);
+	temp = array[i + 1];
+	array[i + 1] = array[high];
+	array[high] = temp;
+
+	print_array(array, size);
+
 	return (i + 1);
-}
-
-/**
- * swap_val - function that swap 2 value of array
- * @x: 1st value
- * @y: 2nd value
- * Return: nothing
- */
-void swap_val(int *x, int *y)
-{
-	int t_array;
-
-	t_array = *x;
-	*x = *y;
-	*y = t_array;
 }
